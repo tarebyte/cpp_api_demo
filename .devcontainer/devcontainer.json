@@ -1,0 +1,36 @@
+{
+	"build": {
+		"dockerfile": "./Dockerfile",
+		"context": ".",
+		"args": {
+			"VARIANT": "ubuntu-22.04"
+		}
+	},
+	"features": {
+		"ghcr.io/devcontainers/features/git:1": {
+			"version": "latest",
+			"ppa": "false"
+		}
+	},
+	// Cross-orchestrator way to add capabilities typically disabled for a container.
+	"capAdd": [
+		"SYS_PTRACE"
+	],
+	// Cross-orchestrator way to set container security options.
+	"securityOpt": [
+		"seccomp=unconfined"
+	],
+	// Configure tool-specific properties.
+	"customizations": {
+		// Configure properties specific to VS Code.
+		"vscode": {
+			// Add the IDs of extensions you want installed when the container is created.
+			"extensions": [
+				"ms-vscode.cpptools-extension-pack"
+			]
+		}
+	},
+	// Use 'postCreateCommand' to run commands after the container is created.
+	"postCreateCommand": "vcpkg install",
+	"remoteUser": "vscode"
+}
